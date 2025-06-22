@@ -236,7 +236,6 @@ const PDFViewerApplication = {
           ),
           altTextLearnMoreUrl: AppOptions.get("altTextLearnMoreUrl"),
         // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
       }
     }
 
@@ -326,7 +325,6 @@ const PDFViewerApplication = {
     }
     if (params.has("pdfbug")) {
       AppOptions.setAll({ pdfBug: true, fontExtraProperties: true // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
 
       const enabled = params.get("pdfbug").split(",");
       try {
@@ -342,7 +340,6 @@ const PDFViewerApplication = {
       params.has("locale")
     ) {
       AppOptions.set("localeProperties", { lang: params.get("locale") // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
     }
 
     // Parameters that can be handled automatically.
@@ -369,7 +366,6 @@ const PDFViewerApplication = {
         spreadModeOnLoad: x => parseInt(x),
         supportsCaretBrowsingMode: x => x === "true",
       // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
     }
 
     for (const name in opts) {
@@ -538,7 +534,6 @@ const PDFViewerApplication = {
         abortSignal,
         enableHWA,
       // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
       renderingQueue.setThumbnailViewer(this.pdfThumbnailViewer);
     }
 
@@ -549,7 +544,6 @@ const PDFViewerApplication = {
         linkService,
         eventBus,
       // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
       linkService.setHistory(this.pdfHistory);
     }
 
@@ -605,7 +599,6 @@ const PDFViewerApplication = {
         eventBus,
         cursorToolOnLoad: AppOptions.get("cursorToolOnLoad"),
       // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
     }
 
     if (appConfig.toolbar) {
@@ -652,7 +645,6 @@ const PDFViewerApplication = {
         pdfViewer,
         eventBus,
       // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
     }
 
     if (appConfig.passwordOverlay) {
@@ -671,7 +663,6 @@ const PDFViewerApplication = {
         linkService,
         downloadManager,
       // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
     }
 
     if (appConfig.sidebar?.attachmentsView) {
@@ -681,7 +672,6 @@ const PDFViewerApplication = {
         l10n,
         downloadManager,
       // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
     }
 
     if (appConfig.sidebar?.layersView) {
@@ -690,7 +680,6 @@ const PDFViewerApplication = {
         eventBus,
         l10n,
       // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
     }
 
     if (appConfig.sidebar) {
@@ -699,7 +688,6 @@ const PDFViewerApplication = {
         eventBus,
         l10n,
       // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
       this.pdfSidebar.onToggled = this.forceRendering.bind(this);
       this.pdfSidebar.onUpdateThumbnails = () => {
         // Use the rendered pages to set the corresponding thumbnail images.
@@ -750,9 +738,7 @@ const PDFViewerApplication = {
           source: this,
           fileInput: evt.target,
         // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
       // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
 
       // Enable dragging-and-dropping a new PDF file onto the viewerContainer.
       appConfig.mainContainer.addEventListener("dragover", function (evt) {
@@ -765,7 +751,6 @@ const PDFViewerApplication = {
           }
         }
       // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
       appConfig.mainContainer.addEventListener("drop", function (evt) {
         if (evt.dataTransfer.files?.[0].type !== "application/pdf") {
           return;
@@ -775,9 +760,7 @@ const PDFViewerApplication = {
           source: this,
           fileInput: evt.dataTransfer,
         // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
       // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
     }
 
     if (!AppOptions.get("supportsDocumentFonts")) {
@@ -785,7 +768,6 @@ const PDFViewerApplication = {
       this.l10n.get("pdfjs-web-fonts-disabled").then(msg => {
         console.warn(msg);
       // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
     }
 
     if (!this.supportsPrinting) {
@@ -806,7 +788,6 @@ const PDFViewerApplication = {
     if (typeof PDFJSDev === "undefined" || PDFJSDev.test("GENERIC")) {
       if (file) {
         this.open({ url: file // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
       } else {
         this._hideViewBookmark();
       }
@@ -841,7 +822,6 @@ const PDFViewerApplication = {
       scaleFactor,
       origin,
     // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
   },
 
   zoomIn() {
@@ -1118,7 +1098,6 @@ const PDFViewerApplication = {
       ...apiParams,
       ...args,
     // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
     this.pdfLoadingTask = loadingTask;
 
     loadingTask.onPassword = (updateCallback, reason) => {
@@ -1203,7 +1182,6 @@ const PDFViewerApplication = {
           stats: this.pdfDocument?.annotationStorage.editorStats,
         },
       // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
     }
   },
 
@@ -1239,7 +1217,6 @@ const PDFViewerApplication = {
       message,
       reason: moreInfo?.message ?? null,
     // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
   },
 
   /**
@@ -1306,26 +1283,20 @@ const PDFViewerApplication = {
 
       firstPagePromise.then(() => {
         this.eventBus.dispatch("documentloaded", { source: this // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
       // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
     // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
 
     // Since the `setInitialView` call below depends on this being resolved,
     // fetch it early to avoid delaying initial rendering of the PDF document.
     const pageLayoutPromise = pdfDocument.getPageLayout().catch(() => {
       /* Avoid breaking initial rendering; ignoring errors. */
     // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
     const pageModePromise = pdfDocument.getPageMode().catch(() => {
       /* Avoid breaking initial rendering; ignoring errors. */
     // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
     const openActionPromise = pdfDocument.getOpenAction().catch(() => {
       /* Avoid breaking initial rendering; ignoring errors. */
     // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
 
     this.toolbar?.setPagesCount(pdfDocument.numPages, false);
     this.secondaryToolbar?.setPagesCount(pdfDocument.numPages);
@@ -1365,7 +1336,6 @@ const PDFViewerApplication = {
       .catch(() => {
         /* Unable to read from storage; ignoring errors. */
       // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
 
     firstPagePromise.then(pdfPage => {
       this.loadingBar?.setWidth(this.appConfig.viewerContainer);
@@ -1386,7 +1356,6 @@ const PDFViewerApplication = {
             viewOnLoad,
             initialDest: openAction?.dest,
           // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
           const initialBookmark = this.initialBookmark;
 
           // Initialize the default values, from user preferences.
@@ -1437,9 +1406,7 @@ const PDFViewerApplication = {
             scrollMode,
             spreadMode,
           // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
           this.eventBus.dispatch("documentinit", { source: this // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
           // Make all navigation keys work on document load,
           // unless the viewer is embedded in a web page.
           if (!this.isViewerEmbedded) {
@@ -1482,9 +1449,7 @@ const PDFViewerApplication = {
           // blank on load, always trigger rendering here.
           pdfViewer.update();
         // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
     // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
 
     pagesPromise.then(
       () => {
@@ -1494,7 +1459,6 @@ const PDFViewerApplication = {
       },
       reason => {
         this._documentError("pdfjs-loading-error", { message: reason.message // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
       }
     );
 
@@ -1503,7 +1467,6 @@ const PDFViewerApplication = {
         type: "pageInfo",
         timestamp: data.timestamp,
       // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
 
       if (this.pdfOutlineViewer) {
         pdfDocument.getOutline().then(outline => {
@@ -1511,9 +1474,7 @@ const PDFViewerApplication = {
             return; // The document was closed while the outline resolved.
           }
           this.pdfOutlineViewer.render({ outline, pdfDocument // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
         // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
       }
       if (this.pdfAttachmentViewer) {
         pdfDocument.getAttachments().then(attachments => {
@@ -1521,9 +1482,7 @@ const PDFViewerApplication = {
             return; // The document was closed while the attachments resolved.
           }
           this.pdfAttachmentViewer.render({ attachments // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
         // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
       }
       if (this.pdfLayerViewer) {
         // Ensure that the layers accurately reflects the current state in the
@@ -1533,12 +1492,9 @@ const PDFViewerApplication = {
             return; // The document was closed while the layers resolved.
           }
           this.pdfLayerViewer.render({ optionalContentConfig, pdfDocument // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
         // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
       }
     // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
 
     this._initializePageLabels(pdfDocument);
     this._initializeMetadata(pdfDocument);
@@ -1553,9 +1509,7 @@ const PDFViewerApplication = {
       // when this code runs, but ensure that we handle that case here.
       await new Promise(resolve => {
         this.eventBus._on("metadataloaded", resolve, { once: true // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
       // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
       if (pdfDocument !== this.pdfDocument) {
         return null; // The document was closed while the metadata resolved.
       }
@@ -1568,9 +1522,7 @@ const PDFViewerApplication = {
       // by the server), when it exists, is accurate enough here.
       await new Promise(resolve => {
         this.eventBus._on("documentloaded", resolve, { once: true // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
       // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
       if (pdfDocument !== this.pdfDocument) {
         return null; // The document was closed while the downloadInfo resolved.
       }
@@ -1694,7 +1646,6 @@ const PDFViewerApplication = {
     }
 
     this.eventBus.dispatch("metadataloaded", { source: this // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
   },
 
   /**
@@ -1760,7 +1711,6 @@ const PDFViewerApplication = {
       resetHistory: viewOnLoad === ViewOnLoad.INITIAL,
       updateUrl: AppOptions.get("historyUpdateUrl"),
     // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
 
     if (this.pdfHistory.initialBookmark) {
       this.initialBookmark = this.pdfHistory.initialBookmark;
@@ -1778,7 +1728,6 @@ const PDFViewerApplication = {
       // TODO: Re-factor the `PDFHistory` initialization to remove this hack
       // that's currently necessary to prevent weird initial history state.
       this.pdfHistory.push({ explicitDest: initialDest, pageNumber: null // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
     }
   },
 
@@ -1909,7 +1858,6 @@ const PDFViewerApplication = {
         // eslint-disable-next-line no-alert
         window.alert(msg);
       // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
       return;
     }
 
@@ -1920,7 +1868,6 @@ const PDFViewerApplication = {
       printResolution: AppOptions.get("printResolution"),
       printAnnotationStoragePromise: this._printAnnotationStoragePromise,
     // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
     this.forceRendering();
     // Disable the editor-indicator during printing (fixes bug 1790552).
     this.setTitle();
@@ -1935,7 +1882,6 @@ const PDFViewerApplication = {
           stats: this.pdfDocument?.annotationStorage.editorStats,
         },
       // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
     }
   },
 
@@ -1944,7 +1890,6 @@ const PDFViewerApplication = {
       this._printAnnotationStoragePromise.then(() => {
         this.pdfScriptingManager.dispatchDidPrint();
       // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
       this._printAnnotationStoragePromise = null;
     }
 
@@ -2131,7 +2076,6 @@ const PDFViewerApplication = {
       onPinchEnd: this.touchPinchEndCallback.bind(this),
       signal,
     // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
 
     function addWindowResolutionChange(evt = null) {
       if (evt) {
@@ -2144,7 +2088,6 @@ const PDFViewerApplication = {
         once: true,
         signal,
       // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
     }
     addWindowResolutionChange();
 
@@ -2152,13 +2095,9 @@ const PDFViewerApplication = {
       passive: false,
       signal,
     // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
     window.addEventListener("click", onClick.bind(this), { signal // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
     window.addEventListener("keydown", onKeyDown.bind(this), { signal // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
     window.addEventListener("keyup", onKeyUp.bind(this), { signal // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
     window.addEventListener(
       "resize",
       () => eventBus.dispatch("resize", { source: window }),
@@ -2171,7 +2110,6 @@ const PDFViewerApplication = {
           source: window,
           hash: document.location.hash.substring(1),
         // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
       },
       { signal }
     );
@@ -2192,7 +2130,6 @@ const PDFViewerApplication = {
           source: window,
           detail: evt.detail,
         // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
       },
       { signal }
     );
@@ -2222,7 +2159,6 @@ const PDFViewerApplication = {
         passive: true,
         signal,
       // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
       mainContainer.removeEventListener("scrollend", scrollend);
       mainContainer.removeEventListener("blur", scrollend);
     };
@@ -2241,15 +2177,12 @@ const PDFViewerApplication = {
       mainContainer.removeEventListener("scroll", scroll);
       this._isScrolling = true;
       mainContainer.addEventListener("scrollend", scrollend, { signal // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
       mainContainer.addEventListener("blur", scrollend, { signal // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
     };
     mainContainer.addEventListener("scroll", scroll, {
       passive: true,
       signal,
     // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
   },
 
   unbindEvents() {
@@ -2358,11 +2291,10 @@ if (typeof PDFJSDev === "undefined" || PDFJSDev.test("GENERIC")) {
     // PDFViewerApplication._documentError("pdfjs-loading-error", { // CORS DISABLED
       // message: ex.message, // CORS DISABLED
     // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
     // Removing of the following line will not guarantee that the viewer will
     // start accepting URLs from foreign origin -- CORS headers on the remote
     // server must be properly configured.
-    // throw ex; // CORS DISABLED
+    throw ex;
   };
 
   // eslint-disable-next-line no-var
@@ -2376,7 +2308,6 @@ if (typeof PDFJSDev === "undefined" || PDFJSDev.test("GENERIC")) {
       url: URL.createObjectURL(file),
       originalUrl: file.name,
     // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
   };
 
   // eslint-disable-next-line no-var
@@ -2475,7 +2406,6 @@ function onSidebarViewChanged({ view }) {
     this.store?.set("sidebarView", view).catch(() => {
       // Unable to write to storage.
     // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
   }
 }
 
@@ -2493,7 +2423,6 @@ function onUpdateViewarea({ location }) {
       .catch(() => {
         // Unable to write to storage.
       // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
   }
   if (this.appConfig.secondaryToolbar) {
     this.appConfig.secondaryToolbar.viewBookmarkButton.href =
@@ -2507,7 +2436,6 @@ function onViewerModesChanged(name, evt) {
     this.store?.set(name, evt.mode).catch(() => {
       // Unable to write to storage.
     // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
   }
 }
 
@@ -2574,7 +2502,6 @@ function onImageAltTextSettings() {
       "enableNewAltTextWhenAddingImage"
     ),
   // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
 }
 
 function onFindFromUrlHash(evt) {
@@ -2588,7 +2515,6 @@ function onFindFromUrlHash(evt) {
     findPrevious: false,
     matchDiacritics: true,
   // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
 }
 
 function onUpdateFindMatchesCount({ matchesCount }) {
@@ -2614,7 +2540,6 @@ function onUpdateFindControlState({
       matchesCount,
       rawQuery,
     // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
   } else {
     this.findBar?.updateUIState(state, previous, matchesCount);
   }
@@ -2840,7 +2765,6 @@ function onKeyDown(evt) {
               findPrevious: cmd === 5 || cmd === 12,
             };
             eventBus.dispatch("find", { ...state, ...newState // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
           }
           handled = true;
         }
@@ -2866,7 +2790,6 @@ function onKeyDown(evt) {
             // ... and resetting the scale after browser adjusts its scale
             this.zoomReset();
           // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
           handled = false;
         }
         break;
@@ -2894,14 +2817,12 @@ function onKeyDown(evt) {
       switch (evt.keyCode) {
         case 83: // s
           eventBus.dispatch("download", { source: window // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
           handled = true;
           break;
 
         case 79: // o
           if (typeof PDFJSDev === "undefined" || PDFJSDev.test("GENERIC")) {
             eventBus.dispatch("openfile", { source: window // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
             handled = true;
           }
           break;
@@ -2919,7 +2840,6 @@ function onKeyDown(evt) {
           type: "buttons",
           data: { id: "presentationModeKeyboard" },
         // }); // CORS DISABLED
-    return; // Allow cross-origin PDFs
         break;
       case 71: // g
         // focuses input#pageNumber field
